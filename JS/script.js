@@ -1,3 +1,18 @@
+let usuario 
+
+function validarUsuario() {
+    usuario = document.querySelector(".telaDeEntrada input").value
+    let id = {name: usuario}
+    const promise = axios.post("https://mock-api.driven.com.br/api/v4/uol/participants",id )
+    promise.then(entrar).catch(tratarErro)
+}
+function tratarErro(erro) {
+    let status = erro.response.status
+    let nome = document.querySelector(".telaDeEntrada inout").value
+    nome.innerHTML = ""
+    alert(`Erro ${status}! O nome de usuário ${usuario} já existe`)
+}
+
 function entrar() {
     buscarMensagens()
 
