@@ -4,6 +4,7 @@
 body{
     font-family: 'Roboto', sans-serif;
     background-color: #F3F3F3;
+    /* background-color: #FFFFFF; */
 }
 .telaDeEntrada {
     display: flex;
@@ -22,8 +23,8 @@ body{
     border: 1px solid #D7D7D7;
 
     font-size: 18px;
+    color: #AEAEAE;
     font-weight: normal;
-    color: #D7D7D7;
     text-align: center;
     margin-top: 94px;
 }
@@ -55,7 +56,7 @@ body{
     justify-content: space-between;
     align-items: center;
     padding: 0 22px;
-    position: absolute;
+    position: fixed;
     top: 0;
     font-size: 40px;
 }
@@ -73,7 +74,7 @@ body{
     justify-content: space-between;
     align-items: center;
     padding: 0 22px;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     font-size: 40px;
 }
@@ -84,6 +85,7 @@ body{
     font-weight: 400;
     color: #000000;
     border: none;
+    border-radius: 9px;
 }
 .telaInicial .barraInferior input::placeholder {
     font-size: 18px;
@@ -92,7 +94,41 @@ body{
     color: #000000;
 }
 
-
 .esconder {
     display: none;
+}
+
+.batePapo {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin: 100px 0;
+}
+.batePapo .status, .batePapo .message, .batePapo .private_message {
+    width: 100%;
+    height: 40px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0 9px;
+}
+.batePapo .status {
+    background-color: #DCDCDC;
+}
+.batePapo .message {
+    background-color: #FFFFFF;
+}
+.batePapo .private_message {
+    background-color: #FFDEDE;
+}
+.batePapo .horaMensagem {
+    color: #AAAAAA;
+}
+.batePapo .remetente, .batePapo .destinatario {
+    color: #000000;
+    font-weight: 700;
 }
