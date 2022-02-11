@@ -1,8 +1,9 @@
 let usuario 
+let id
 
 function validarUsuario() {
     usuario = document.querySelector(".telaDeEntrada input").value
-    let id = {name: usuario}
+    id = {name: usuario}
     const promise = axios.post("https://mock-api.driven.com.br/api/v4/uol/participants",id )
     promise.then(entrar).catch(tratarErro)
 }
@@ -14,6 +15,7 @@ function tratarErro(erro) {
 }
 
 function entrar() {
+    setInterval(permanecerOnline, 5000)
     buscarMensagens()
 
     let telaDeEntrada = document.querySelector(".telaDeEntrada")
@@ -67,3 +69,7 @@ function atualizarMensagens() {
     setTimeout(buscarMensagens, 3000)
 }
 
+function permanecerOnline() {
+    const promise = axios.post("https://mock-api.driven.com.br/api/v4/uol/status", id)
+    promise.then()
+}
