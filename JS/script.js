@@ -34,7 +34,6 @@ let batePapo = document.querySelector(".telaInicial .batePapo")
 function processarResposta(resposta) {
     batePapo.innerHTML = "";
     let mensagens = resposta.data
-    console.log("atualizei")
     for(let i = 0; i < mensagens.length; i++) {
         if (mensagens[i].type == "status") {
             batePapo.innerHTML += ` 
@@ -52,7 +51,7 @@ function processarResposta(resposta) {
             <div class="destinatario">${mensagens[i].to}</div> 
             <div class="texto">${mensagens[i].text}</div> 
             </div>`
-        } else if (mensagens[i].type == "private_message") {
+        } else if (mensagens[i].type == "private_message" && (mensagens[i].to == usuario)||(mensagens[i].from == usuario)) {
             batePapo.innerHTML += ` 
             <div class="${mensagens[i].type}">
             <div class="horaMensagem">(${mensagens[i].time})</div>
@@ -72,4 +71,24 @@ function atualizarMensagens() {
 function permanecerOnline() {
     const promise = axios.post("https://mock-api.driven.com.br/api/v4/uol/status", id)
     promise.then()
+}
+
+
+let textoMensagen
+let mensagem
+
+function validarMensagem() {
+    textoMensagen = document.querySelector(".barraInferior input").value
+    mensagem = {from: usuario, to: "Todos", text: textoMensagen, type: "message"}
+    
+    const promise = axios.post("https://mock-api.driven.com.br/api/v4/uol/messages", mensagem)
+    promise.then(enviarMensagem).catch(atualizarPagina)
+}
+
+
+function enviarMensagem() {
+    buscarMensagens()   
+}
+function atualizarPagina() {
+    window.location.reload()
 }
