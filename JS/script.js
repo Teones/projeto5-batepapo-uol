@@ -9,9 +9,8 @@ function validarUsuario() {
 }
 function tratarErro(erro) {
     let status = erro.response.status
-    let nome = document.querySelector(".telaDeEntrada inout").value
-    nome.innerHTML = ""
     alert(`Erro ${status}! O nome de usuário ${usuario} já existe`)
+    atualizarPagina()
 }
 
 function entrar() {
