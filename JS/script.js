@@ -37,27 +37,18 @@ function processarResposta(resposta) {
         if (mensagens[i].type == "status") {
             batePapo.innerHTML += ` 
             <div class="${mensagens[i].type}">
-            <div class="horaMensagem">(${mensagens[i].time})</div>
-            <div class="remetente">${mensagens[i].from}</div> 
-            <div class="texto">${mensagens[i].text}</div> 
+                <horaMensagem>(${mensagens[i].time}) <b>${mensagens[i].from}</b ${mensagens[i].text}
             </div>`
         } else if (mensagens[i].type == "message") {
             batePapo.innerHTML += ` 
             <div class="${mensagens[i].type}">
-            <div class="horaMensagem">(${mensagens[i].time})</div>
-            <div class="remetente">${mensagens[i].from}</div> 
-            <div class="texto">para</div> 
-            <div class="destinatario">${mensagens[i].to}</div> 
-            <div class="texto">${mensagens[i].text}</div> 
+                <horaMensagem>(${mensagens[i].time}) <b>${mensagens[i].from}</b> para <b>${mensagens[i].to}</b> ${mensagens[i].text}
             </div>`
+            
         } else if (mensagens[i].type == "private_message" && (mensagens[i].to == usuario)||(mensagens[i].from == usuario)) {
             batePapo.innerHTML += ` 
             <div class="${mensagens[i].type}">
-            <div class="horaMensagem">(${mensagens[i].time})</div>
-            <div class="remetente">${mensagens[i].from}</div>
-            <div class="texto">para</div> 
-            <div class="destinatario">${mensagens[i].to}</div>  
-            <div class="texto">${mensagens[i].text}</div> 
+                <horaMensagem>(${mensagens[i].time}) <b>${mensagens[i].from}</b> para <b>${mensagens[i].to}</b> ${mensagens[i].text}
             </div>`
         }
     } atualizarMensagens()
@@ -72,7 +63,6 @@ function permanecerOnline() {
     promise.then()
 }
 
-
 let textoMensagen
 let mensagem
 
@@ -83,7 +73,6 @@ function validarMensagem() {
     const promise = axios.post("https://mock-api.driven.com.br/api/v4/uol/messages", mensagem)
     promise.then(enviarMensagem).catch(atualizarPagina)
 }
-
 
 function enviarMensagem() {
     buscarMensagens()   
