@@ -41,13 +41,13 @@ function processarResposta(resposta) {
             </div>`
         } else if (mensagens[i].type == "message") {
             batePapo.innerHTML += ` 
-            <div class="${mensagens[i].type}">
+            <div class="${mensagens[i].type}" data-identifier="message">
                 <horaMensagem>(${mensagens[i].time}) <b>${mensagens[i].from}</b> para <b>${mensagens[i].to}</b> ${mensagens[i].text}
             </div>`
             
         } else if (mensagens[i].type == "private_message" && (mensagens[i].to == usuario)||(mensagens[i].from == usuario)) {
             batePapo.innerHTML += ` 
-            <div class="${mensagens[i].type}">
+            <div class="${mensagens[i].type}" data-identifier="message">
                 <horaMensagem>(${mensagens[i].time}) <b>${mensagens[i].from}</b> para <b>${mensagens[i].to}</b> ${mensagens[i].text}
             </div>`
         }
