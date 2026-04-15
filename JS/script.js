@@ -1,6 +1,13 @@
 let usuario 
 let id
 
+const inputMensagem = document.querySelector(".barraInferior input");
+inputMensagem.addEventListener("keypress", function (e) {
+    if (e.key === "Enter") {
+        validarMensagem();
+    }
+});
+
 function validarUsuario() {
     usuario = document.querySelector(".telaDeEntrada input").value
     id = {name: usuario}
@@ -88,6 +95,7 @@ function validarMensagem() {
 }
 
 function enviarMensagem() {
+    document.querySelector(".barraInferior input").value = "";
     buscarMensagens()
     setTimeout(scrollarParaBaixo, 500);  
 }
