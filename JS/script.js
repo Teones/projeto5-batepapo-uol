@@ -1,6 +1,13 @@
 let usuario 
 let id
 
+const inputUser = document.querySelector(".telaDeEntrada input")
+inputUser.addEventListener("keypress", function (e) {
+    if (e.key == "Enter") {
+        validarUsuario()
+    }
+})
+
 const inputMensagem = document.querySelector(".barraInferior input");
 inputMensagem.addEventListener("keypress", function (e) {
     if (e.key === "Enter") {
