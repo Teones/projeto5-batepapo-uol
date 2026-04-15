@@ -125,7 +125,7 @@ body{
 .batePapo .private_message {
     background-color: #FFDEDE;
 }
-.batePapo .horaMensagem {
+.batePapo .hora {
     color: #AAAAAA;
 }
 .batePapo .remetente, .batePapo .destinatario {

@@ -21,6 +21,8 @@ function entrar() {
     telaDeEntrada.classList.add("esconder")
     let telaInicial = document.querySelector(".telaInicial")
     telaInicial.classList.remove("esconder")
+
+    setTimeout(scrollarParaBaixo, 1000);
 }
 
 function buscarMensagens() {
@@ -32,28 +34,39 @@ let batePapo = document.querySelector(".telaInicial .batePapo")
 
 function processarResposta(resposta) {
     batePapo.innerHTML = "";
-    let mensagens = resposta.data
-    for(let i = 0; i < mensagens.length; i++) {
-        if (mensagens[i].type == "status") {
-            batePapo.innerHTML += ` 
-            <div class="${mensagens[i].type}">
-                <horaMensagem>(${mensagens[i].time}) <b>${mensagens[i].from}</b ${mensagens[i].text}
-            </div>`
-        } else if (mensagens[i].type == "message") {
-            batePapo.innerHTML += ` 
-            <div class="${mensagens[i].type}" data-identifier="message">
-                <horaMensagem>(${mensagens[i].time}) <b>${mensagens[i].from}</b> para <b>${mensagens[i].to}</b> ${mensagens[i].text}
-            </div>`
-            
-        } else if (mensagens[i].type == "private_message" && (mensagens[i].to == usuario)||(mensagens[i].from == usuario)) {
-            batePapo.innerHTML += ` 
-            <div class="${mensagens[i].type}" data-identifier="message">
-                <horaMensagem>(${mensagens[i].time}) <b>${mensagens[i].from}</b> para <b>${mensagens[i].to}</b> ${mensagens[i].text}
-            </div>`
-        }
-    } atualizarMensagens()
-}
+    let mensagens = resposta.data;
 
+    for (let i = 0; i < mensagens.length; i++) {
+        let msg = mensagens[i];
+        
+        if (msg.type === "status") {
+            batePapo.innerHTML += ` 
+            <div class="${msg.type}">
+                <span class="hora">(${msg.time})</span> <b>${msg.from}</b> ${msg.text}
+            </div>`;
+        } else if (msg.type === "message") {
+            batePapo.innerHTML += ` 
+            <div class="${msg.type}" data-identifier="message">
+                <span class="hora">(${msg.time})</span> <b>${msg.from}</b> para <b>${msg.to}</b>: ${msg.text}
+            </div>`;
+        } else if (msg.type === "private_message" && (msg.to === usuario || msg.from === usuario)) {
+            batePapo.innerHTML += ` 
+            <div class="${msg.type}" data-identifier="message">
+                <span class="hora">(${msg.time})</span> <b>${msg.from}</b> reservadamente para <b>${msg.to}</b>: ${msg.text}
+            </div>`;
+        }
+    }
+
+    const distandoTopo = window.scrollY + window.innerHeight;
+    const alturaTotal = document.documentElement.scrollHeight;
+    const estaNoFinal = (alturaTotal - distandoTopo) < 50;
+
+
+    if (estaNoFinal) {
+        scrollarParaBaixo();
+    }
+    atualizarMensagens();
+}
 function atualizarMensagens() {
     setTimeout(buscarMensagens, 3000)
 }
@@ -75,8 +88,16 @@ function validarMensagem() {
 }
 
 function enviarMensagem() {
-    buscarMensagens()   
+    buscarMensagens()
+    setTimeout(scrollarParaBaixo, 500);  
 }
 function atualizarPagina() {
     window.location.reload()
+}
+
+function scrollarParaBaixo() {
+    const ultimaMensagem = document.querySelector(".batePapo div:last-child");
+    if (ultimaMensagem) {
+        ultimaMensagem.scrollIntoView();
+    }
 }
